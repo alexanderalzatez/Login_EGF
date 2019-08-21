@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".LogueoActivity">
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:gravity="center"
+                      android:layout_gravity="center"
+                      android:orientation="vertical">
+
+            <ImageView android:layout_width="235dp"
+                       android:layout_height="181dp"
+                       android:src="@drawable/logotrasteo"
+                       android:layout_marginTop="5dp"
+                       android:layout_gravity="center"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_marginLeft="16dp"
+                          android:layout_marginBottom="8dp"
+                          android:layout_marginRight="16dp">
+                <ImageView android:layout_width="66dp"
+                           android:layout_height="41dp"
+                           android:scaleType="centerInside"
+                           android:src="@drawable/usuarioimg"/>
+
+                <EditText android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/etCorreo"
+                          android:hint="@string/ingresa_correo"
+                          android:fontFamily="sans-serif"
+                          android:inputType="textEmailAddress"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_marginLeft="16dp"
+                          android:layout_marginRight="16dp">
+                <ImageView android:layout_width="66dp"
+                           android:layout_height="41dp"
+                           android:scaleType="centerInside"
+                           android:src="@drawable/contraseniimg2"/>
+
+                <EditText android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/etContraseña"
+                          android:hint="@string/ingreso_contraseña"
+                          android:fontFamily="sans-serif"
+                          android:inputType="textPassword"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="top|center|start"
+                          android:orientation="vertical"
+                          android:padding="30dp">
+                <Button android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bnIniciarSesion"
+                        android:background="@drawable/button_animation"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="@color/color_azulOscuro"
+                        android:textAllCaps="false"
+                        android:textSize="18sp"
+                        android:text="@string/bn_iniciar_sesion"/>
+                <Button android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bnRegistro"
+                        android:background="@drawable/button_animation"
+                        android:textColor="@color/color_azulOscuro"
+                        android:textAllCaps="false"
+                        android:textSize="18sp"
+                        android:text="@string/registro"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_gravity="center"
+                          android:gravity="center">
+                <ImageView android:layout_width="66dp"
+                           android:layout_height="66dp"
+                           android:src="@drawable/androidimg"/>
+                <ImageView android:layout_width="67dp"
+                           android:layout_height="66dp"
+                           android:src="@drawable/facebookimg"/>
+                <ImageView android:layout_width="69dp"
+                           android:layout_height="66dp"
+                           android:src="@drawable/wwwimg"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

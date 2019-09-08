@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_Miperfil"
+                android:icon="@drawable/avatar"
+                android:title="@string/mi_perfil"/>
+        <item
+                android:id="@+id/nav_Miservicio"
+                android:icon="@drawable/moving"
+                android:title="@string/mi_servicio"/>
+        <item
+                android:id="@+id/nav_Iniciarsesion"
+                android:icon="@drawable/enter"
+                android:title="@string/iniciar_sesion"/>
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                    android:id="@+id/nav_Cambiarclave"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="@string/menu_share"/>
+            <item
+                    android:id="@+id/nav_Salir"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/menu_send"/>
+        </menu>
+    </item>
+
+</menu>

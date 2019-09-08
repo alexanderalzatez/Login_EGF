@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".CambiarclaveFragment">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cambiar_clave"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:paddingTop="100dp"
+            />
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="100dp">
+
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="41dp"
+                   android:scaleType="centerInside"
+                   android:src="@drawable/contraseniimg2"/>
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/ingreso_contraseña"
+                  android:fontFamily="sans-serif"
+                  android:inputType="textPassword"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="20dp">
+
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="41dp"
+                       android:scaleType="centerInside"
+                       android:src="@drawable/contraseniimg2"/>
+
+            <EditText android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:hint="@string/repita_contrase_a"
+                      android:fontFamily="sans-serif"
+                      android:inputType="textPassword"/>
+        </LinearLayout>
+
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_animation"
+                android:textColor="@color/color_azulOscuro"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:text="@string/guardar"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>

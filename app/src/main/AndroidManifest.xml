@@ -4,11 +4,16 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/ic_move_launcher"
             android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_move_launcher"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity
+                android:name=".DrawerNavActivity"
+                android:label="@string/title_activity_drawer_nav"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".RegistroActivity">
         </activity>
         <activity android:name=".LogueoActivity">

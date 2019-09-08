@@ -11,7 +11,8 @@
         tools:context=".MainActivity">
 
     <ImageView android:layout_width="wrap_content"
-               android:layout_height="wrap_content" android:src="@drawable/logotrasteo"/>
+               android:layout_height="wrap_content" android:src="@drawable/logo_moveapp"/>
+
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:id="@+id/tvCorreoMain"
@@ -25,6 +26,7 @@
               android:id="@+id/tvResultadoMain"
               android:gravity="center"
               android:text="@string/resultado"/>
+
 
 
 </LinearLayout>

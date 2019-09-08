@@ -44,4 +44,5 @@
     <string name="Lugar_de_destino">Lugar de destino</string>
     <string name="enviar">Enviar</string>
     <string name="Correo">Correo</string>
+    <string name="Move_app">MoveApp</string>
 </resources>

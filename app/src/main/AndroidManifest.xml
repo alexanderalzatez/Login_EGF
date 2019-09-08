@@ -11,12 +11,15 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".DrawerNavActivity"
-                android:label="@string/title_activity_drawer_nav"
+                android:label="@string/Move_app"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".RegistroActivity">
+        <activity android:name=".RegistroActivity"
+                  android:label="@string/Move_app">
         </activity>
-        <activity android:name=".LogueoActivity">
+        <activity android:name=".LogueoActivity"
+                  android:label="@string/Move_app">
+
         </activity>
         <activity
                 android:name=".SplashActivity"

@@ -16,6 +16,7 @@
         </activity>
         <activity android:name=".RegistroActivity"
                   android:label="@string/Move_app">
+            
         </activity>
         <activity android:name=".LogueoActivity"
                   android:label="@string/Move_app">

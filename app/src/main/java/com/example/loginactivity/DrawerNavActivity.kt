@@ -86,10 +86,7 @@ class DrawerNavActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 startActivity(intent)
                 finish()
             }
-            R.id.nav_Salir -> {
-                val salirFragment = SalirFragment()
-                transaction.replace(R.id.contenedor,salirFragment).commit()
-            }
+
             R.id.nav_Cambiarclave -> {
                 val cambiarclaveFragment = CambiarclaveFragment()
                 transaction.replace(R.id.contenedor,cambiarclaveFragment).commit()

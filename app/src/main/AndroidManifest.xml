@@ -4,14 +4,23 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/ic_move_launcher"
             android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_move_launcher"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".RegistroActivity">
+        <activity
+                android:name=".DrawerNavActivity"
+                android:label="@string/Move_app"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".LogueoActivity">
+        <activity android:name=".RegistroActivity"
+                  android:label="@string/Move_app">
+            
+        </activity>
+        <activity android:name=".LogueoActivity"
+                  android:label="@string/Move_app">
+
         </activity>
         <activity
                 android:name=".SplashActivity"

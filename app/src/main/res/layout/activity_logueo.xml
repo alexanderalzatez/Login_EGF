@@ -78,6 +78,21 @@
                         android:textAllCaps="false"
                         android:textSize="18sp"
                         android:text="@string/registro"/>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+                    <com.google.android.gms.common.SignInButton
+                            android:id="@+id/sign_in_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvLoginGoogle"
+                            android:text="Logueo con google"/>
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

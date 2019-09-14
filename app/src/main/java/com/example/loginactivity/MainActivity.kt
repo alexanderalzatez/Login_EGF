@@ -8,19 +8,45 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.gms.tasks.Task
+import androidx.annotation.NonNull
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.OnCompleteListener
+
+
 
 class MainActivity : AppCompatActivity() {
 
     var correo=""
+    private lateinit var auth: FirebaseAuth
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var datosRecibidosLo = intent.extras
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            val email = user.email
+            tvResultadoMain.text = "Bienvenido! "+email
+        }
+        val acct = GoogleSignIn.getLastSignedInAccount(this)
+        if (acct != null) {
+            tvResultadoMain.text = acct.email
+        }
+        mGoogleSignInClient = GoogleSignIn.getClient(this,gso)
+        auth = FirebaseAuth.getInstance()
+        /*var datosRecibidosLo = intent.extras
         correo = datosRecibidosLo!!.getString("correo").toString()
-        tvResultadoMain.text = "Bienvenido! " + "\n" + correo + "\n"
+        tvResultadoMain.text = "Bienvenido! " + "\n" + correo + "\n"*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -31,11 +57,17 @@ class MainActivity : AppCompatActivity() {
         when (item!!.itemId) {
             R.id.mCerrarSesion -> {
 
-                var intent2 = Intent(this, LogueoActivity::class.java)
+                mGoogleSignInClient.signOut() //Desconectar de Google
+                auth.signOut() //Desconectar de Firebase
+                startActivity(Intent(this,LogueoActivity::class.java))
+                Toast.makeText(this,"Has cerrado sesión...",Toast.LENGTH_SHORT).show()
+                finish()
+
+                /*var intent2 = Intent(this, LogueoActivity::class.java)
                 Toast.makeText(this,"Has cerrado sesión...",Toast.LENGTH_SHORT).show()
                 setResult(Activity.RESULT_OK, intent2)
                 //startActivity(intent2)
-                finish()
+                finish()*/
             }
 
         }
@@ -44,9 +76,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        var intent2 = Intent(this, LogueoActivity::class.java)
+
+        finish()
+        /*var intent2 = Intent(this, LogueoActivity::class.java)
         Toast.makeText(this,"Has cerrado la aplicación...",Toast.LENGTH_SHORT).show()
         setResult(Activity.RESULT_CANCELED, intent2)
-        finish()
+        finish()*/
     }
 }

@@ -5,67 +5,108 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_logueo.*
 import kotlinx.android.synthetic.main.activity_registro.*
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
+
 
 class LogueoActivity : AppCompatActivity() {
-    var correoRe=""
-    var contraseniaRe=""
-    var flag_registro=false
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var mGoogleSignInClient:GoogleSignInClient
+    val RC_SIGN_IN = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_logueo)
 
+        auth = FirebaseAuth.getInstance()
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
+
+        sign_in_button.setOnClickListener{
+            val signInIntent = mGoogleSignInClient.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
+
         bnRegistro.setOnClickListener {
 
-            var intent = Intent(this,RegistroActivity::class.java)
-            Toast.makeText(this,"Iniciando Registro...",Toast.LENGTH_SHORT).show()
-            startActivityForResult(intent,1234)
+            startActivity(Intent(this,RegistroActivity::class.java))
+            finish()
 
         }
 
         bnIniciarSesion.setOnClickListener {
-            if(flag_registro){
-                if(correoRe==etCorreo.text.toString() && contraseniaRe==etContraseña.text.toString()) {
-                    Toast.makeText(this,"Iniciando sesión...",Toast.LENGTH_SHORT).show()
-                    var intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("correo", correoRe)
-                    intent.putExtra("contrasenia", contraseniaRe)
-                    //startActivity(intent)
-                    startActivityForResult(intent, 5678)
-                }else{
-                    if(correoRe!=etCorreo.text.toString()){
-                        Toast.makeText(this,"Correo incorrecto",Toast.LENGTH_SHORT).show()
+
+            if(etCorreo.text.toString()!="" && etContraseña.text.toString()!="") {
+                auth.signInWithEmailAndPassword(etCorreo.text.toString(), etContraseña.text.toString())
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            val user = auth.currentUser
+                            updateUI(user)
+                        } else {
+                            updateUI(null)
+                        }
                     }
-                    if(contraseniaRe!=etCorreo.text.toString()){
-                        Toast.makeText(this,"Contrasenia incorrecta",Toast.LENGTH_SHORT).show()
-                    }
-                }
             }else{
-                Toast.makeText(this,"Correo o Contraseña incorrecto",Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, "Falló la autenticación.",Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
+
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account!!)
+            } catch (e: ApiException) {
+                updateUI(null)
+
             }
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==1234){
-            if(resultCode== Activity.RESULT_OK){
-                correoRe = data!!.getStringExtra("correo")
-                contraseniaRe = data!!.getStringExtra("contrasenia")
-                //tvResultado.text = "Los datos recibidos del registro son"+"\n"+correoRe +"\n"+contraseniaRe
-                flag_registro=true
-
+    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    updateUI(user)
+                } else {
+                    updateUI(null)
+                }
             }
-        }
-        if(requestCode==5678){
-            if(resultCode==Activity.RESULT_CANCELED){
-                finish()
-            }
-        }
+    }
 
 
+    private fun updateUI(currentUser: FirebaseUser?) {
+        if(currentUser!=null){
+            startActivity(Intent(this,MainActivity::class.java))
+            Toast.makeText(baseContext, "Iniciando sesión...",Toast.LENGTH_SHORT).show()
+            finish()
+        }else{
+            Toast.makeText(baseContext, "Falló la autenticación.",Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

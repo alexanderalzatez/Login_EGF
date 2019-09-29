@@ -46,4 +46,7 @@
     <string name="Correo">Correo</string>
     <string name="Move_app">MoveApp</string>
     <string name="Cambiar_clave">Cambiar clave</string>
+    <string name="facebook_app_id">1562667437209183</string>
+    <string name="fb_login_protocol_scheme">fb1562667437209183</string>
+
 </resources>

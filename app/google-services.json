@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "194007101286",
+    "firebase_url": "https://loginactivity-ccaa6.firebaseio.com",
+    "project_id": "loginactivity-ccaa6",
+    "storage_bucket": "loginactivity-ccaa6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194007101286:android:79bc3f6e87a79e4c",
+        "android_client_info": {
+          "package_name": "com.example.loginactivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194007101286-522qoc9qm4100a1afafe73mdu95rngc1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.loginactivity",
+            "certificate_hash": "f606a4cb96acd9e93ddb8d1ab907d901970a7e77"
+          }
+        },
+        {
+          "client_id": "194007101286-uv0kl78bof7i8odak10uc9i92nnntcpl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMdmkL87kdEZKNObe1ufnE9GsVQE2kS5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194007101286-uv0kl78bof7i8odak10uc9i92nnntcpl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

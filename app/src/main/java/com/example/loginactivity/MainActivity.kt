@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.android.gms.tasks.Task
 import androidx.annotation.NonNull
+import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         when (item!!.itemId) {
             R.id.mCerrarSesion -> {
 
+                LoginManager.getInstance().logOut()//Desconectar de Facebook
                 mGoogleSignInClient.signOut() //Desconectar de Google
                 auth.signOut() //Desconectar de Firebase
                 startActivity(Intent(this,LogueoActivity::class.java))

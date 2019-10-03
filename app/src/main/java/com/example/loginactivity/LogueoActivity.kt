@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -14,8 +15,6 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_logueo.*
 import kotlinx.android.synthetic.main.activity_registro.*
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -23,10 +22,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FacebookAuthProvider
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.*
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.concurrent.TimeUnit
 
 
 class LogueoActivity : AppCompatActivity() {
@@ -34,9 +34,10 @@ class LogueoActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var mGoogleSignInClient:GoogleSignInClient
     private lateinit var callbackManager:CallbackManager
-
+    lateinit var callBackPhone:PhoneAuthProvider.OnVerificationStateChangedCallbacks
     val RC_SIGN_IN = 123
     var banderaGoogle = false
+    var verificacionId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +92,76 @@ class LogueoActivity : AppCompatActivity() {
             }
 
         }
+        bnVerificar.setOnClickListener {
+            verificacion()
+        }
+        bnAutenticar.setOnClickListener {
+            autenticacionPhone()
+        }
     }
+
+    private fun autenticacionPhone() {
+        var verificarNumero = etVerificacion.text.toString()
+
+        val credential = PhoneAuthProvider.getCredential(verificacionId,verificarNumero)
+        SignInPhone(credential)
+    }
+
+    private fun verificacion() {
+
+        verificationCallbacks()
+
+        val phoneNumber = etPhoneNumbertxt.text.toString()
+
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+            phoneNumber,
+            60,
+            TimeUnit.SECONDS,
+            this,
+            callBackPhone
+        )
+    }
+
+    private fun verificationCallbacks(){
+     callBackPhone = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+            SignInPhone(credential)
+         }
+
+         override fun onVerificationFailed(p0: FirebaseException) {
+
+         }
+
+         override fun onCodeSent(verification: String, p1: PhoneAuthProvider.ForceResendingToken) {
+             super.onCodeSent(verification, p1)
+
+             verificacionId = verification
+         }
+
+     }
+    }
+
+    private fun SignInPhone(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithCredential:success")
+
+                    val user = task.result?.user
+                    updateUI(user)
+                    // ...
+                } else {
+                    // Sign in failed, display a message and update the UI
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    Toast.makeText(this,"Falló la utenticación",Toast.LENGTH_SHORT).show()
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        // The verification code entered was invalid
+                    }
+                }
+            }
+    }
+
 
     private fun signInFacebook() {
         login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {

@@ -101,7 +101,33 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="30dp"
                             android:layout_marginBottom="30dp" />
+
                 </LinearLayout>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etPhoneNumbertxt"
+                        android:hint="Ingresa tu número +57 xxx xxx xx xx"
+                        android:textAlignment="center"/>
+
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bnVerificar"
+                        android:layout_gravity="center"
+                        android:text="@string/verificar"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etVerificacion"
+                        android:hint="Ingresa el código de verificación"
+                        android:textAlignment="center"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bnAutenticar"
+                        android:text="@string/autenticaci_n"
+                        android:layout_gravity="center"/>
 
             </LinearLayout>
         </LinearLayout>

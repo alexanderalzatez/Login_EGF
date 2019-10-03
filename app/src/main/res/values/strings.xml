@@ -48,5 +48,7 @@
     <string name="Cambiar_clave">Cambiar clave</string>
     <string name="facebook_app_id">1562667437209183</string>
     <string name="fb_login_protocol_scheme">fb1562667437209183</string>
+    <string name="verificar">Verificar</string>
+    <string name="autenticaci_n">Autenticación</string>
 
 </resources>

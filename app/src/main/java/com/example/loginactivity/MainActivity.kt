@@ -54,6 +54,16 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.overflow_menu,menu)
         return true
     }
+
+    override fun onStart(){
+        super.onStart()
+        if(auth.currentUser == null){
+            startActivity(Intent(this,LogueoActivity::class.java))
+        }else{
+            Toast.makeText(this,"Already signed in",Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.mCerrarSesion -> {

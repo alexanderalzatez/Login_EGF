@@ -255,6 +255,7 @@ class LogueoActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if(currentUser!=null){
+
             startActivity(Intent(this,MainActivity::class.java))
             Toast.makeText(baseContext, "Iniciando sesión...",Toast.LENGTH_SHORT).show()
             finish()

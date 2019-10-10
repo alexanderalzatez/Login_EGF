@@ -17,7 +17,7 @@ import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
-
+import com.google.firebase.database.FirebaseDatabase
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,14 +37,29 @@ class MainActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         user?.let {
             val email = user.email
-            tvResultadoMain.text = "Bienvenido! "+email
+            val name = user.displayName
+            val emailVerify = user.isEmailVerified
+            val uid = user.uid
+            tvResultadoMain.text = "Bienvenido! "+name+"\n email:"+email+"\n Estado de verificación email: "+emailVerify+"\n uid: "+uid
+
+
+            val ref = FirebaseDatabase.getInstance().getReference("userEGFP")
+            val userEGFP_id = ref.push().key!!
+            val usuarioEGFP = UserRealTimeEGFP(userEGFP_id,name,email,emailVerify,uid)
+
+
+            ref.child(userEGFP_id).setValue(usuarioEGFP).addOnCompleteListener {
+                Toast.makeText(applicationContext,"Guardado en la base de datos",Toast.LENGTH_SHORT).show()
+            }
+
         }
         val acct = GoogleSignIn.getLastSignedInAccount(this)
         if (acct != null) {
-            tvResultadoMain.text = acct.email
+            //tvResultadoMain.text = acct.email
         }
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso)
         auth = FirebaseAuth.getInstance()
+
         /*var datosRecibidosLo = intent.extras
         correo = datosRecibidosLo!!.getString("correo").toString()
         tvResultadoMain.text = "Bienvenido! " + "\n" + correo + "\n"*/

@@ -26,6 +26,12 @@
               android:id="@+id/tvResultadoMain"
               android:gravity="center"
               android:text="@string/resultado"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvLoginEGFP"
+            android:text="Resultado Real time date base"
+            android:gravity="center"/>
 
 
 
